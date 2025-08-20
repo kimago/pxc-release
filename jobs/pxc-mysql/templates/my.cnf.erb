@@ -97,23 +97,6 @@ jemalloc-profiling              = ON
 <%= key %> = <%= value %>
 <%- end -%>
 
-[<%= section = 'mysqld-5.7' %>]
-<%- if p('engine_config.galera.enabled') -%>
-wsrep_sst_auth                  = <%= p('admin_username')%>:<%= p('admin_password') %>
-<%- if_p("engine_config.galera.wsrep_applier_threads") do |wsrep_applier_threads| -%>
-wsrep_slave_threads             = <%= wsrep_applier_threads %>
-<%- end -%>
-wsrep_provider                  = /var/vcap/packages/percona-xtradb-cluster-5.7/lib/libgalera_smm.so
-<%- end -%>
-log_slave_updates               = ON
-expire_logs_days                = <%= p('engine_config.binlog.expire_logs_days') %>
-master_verify_checksum          = ON
-symbolic-links                  = OFF
-
-<%- additional_entries.extract_section(section).each do |key, value| -%>
-<%= key %> = <%= value %>
-<%- end -%>
-
 [<%= section = 'mysqld' %>]
 character_set_server            = <%= p('engine_config.character_set_server') %>
 <%- if p('engine_config.collation_server') != 'use_default' -%>

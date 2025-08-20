@@ -1,0 +1,4 @@
+---
+- type: replace
+  path: /instance_groups/name=mysql/vm_extensions?/-
+  value: mysql-lb

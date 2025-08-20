@@ -17,13 +17,6 @@ describe 'galera-agent-config template' do
     end
   end
 
-  context 'when mysql_version is set to 5.7' do
-    before { spec["mysql_version"] = "5.7" }
-    it 'does not includes a apply_pxc57_crash_recovery function' do
-      expect(rendered_template).to_not include("apply_pxc57_crash_recovery")
-    end
-  end
-
   describe 'disable_persistent_storage_safety_check' do
     it 'leaves the safety check on by default' do
       expect(rendered_template).to match(/^check_mysql_disk_persistence/)

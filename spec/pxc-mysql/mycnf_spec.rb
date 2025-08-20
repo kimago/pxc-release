@@ -61,10 +61,7 @@ describe 'my.cnf template' do
       expect(rendered_template).to match(/collation_server\s+=\s+armscii8_general_ci/)
     end
 
-    # pxc-5.7 does not understand all the collations in PXC 8.0
-    # since we use pxc-5.7 for crash recovery and would like to generally read _other_ options pxc-8.0 specific changes
-    # are in the [mysqld-8.0] config section
-    it 'supports pxc-5.7 still reading this config by putting charset/collation options in the [mysqld] section' do
+    it 'configures the default server character set and collation'
       expect(rendered_template).to match(/\[mysqld\]\ncharacter_set_server\s+=\s+armscii8\ncollation_server\s+=\s+armscii8_general_ci/m)
     end
   end
@@ -179,10 +176,6 @@ describe 'my.cnf template' do
       }
     } }
 
-    it 'sets wsrep_sst_auth for 5.7' do
-      expect(rendered_template).to match(/\[mysqld-5\.7\]\nwsrep_sst_auth/m)
-    end
-
     context 'when audit logs are disabled (default)' do
       it 'has no audit log format' do
         expect(rendered_template).not_to include("audit_log_format")
@@ -278,14 +271,6 @@ describe 'my.cnf template' do
       expect(rendered_template).not_to include("wsrep_applier_threads")
     end
 
-    it 'defaults to no wsrep_slave_threads for mysql 5.7' do
-      expect(rendered_template).not_to include("wsrep_slave_threads")
-    end
-
-    it 'does not specify innodb-doublewrite-pages by default for MySQL v5.7 compatibility' do
-      expect(parsed_mycnf).not_to include("mysqld" => hash_including("innodb-doublewrite-pages"))
-    end
-
     context 'engine_config.galera.wsrep_applier_threads is explicitly configured' do
       let(:spec) { {
         "admin_username" => "foo",
@@ -333,12 +318,6 @@ describe 'my.cnf template' do
     it 'enables the Percona jemalloc-profiling option for mysql-8.0' do
       expect(parsed_mycnf).to include("mysqld-8.0" => hash_including("jemalloc-profiling" => "ON"))
     end
-
-    # The jemalloc-profiling feature is only supported in Percona v8.0.25+
-    it 'does not attempt to enable jemalloc-profiling for mysql-5.7' do
-      expect(parsed_mycnf).to_not include("mysqld" => hash_including("jemalloc-profiling" => "ON"))
-      expect(parsed_mycnf).to_not include("mysqld-5.7" => hash_including("jemalloc-profiling" => "ON"))
-    end
   end
 
   context 'when no explicit innodb_flush_method is set' do
@@ -376,9 +355,6 @@ describe 'my.cnf template' do
           "mysql-8.0" => {
             "additional-mysql-8.0-property" => "additional-mysql-8.0-value"
           },
-          "mysql-5.7" => {
-            "additional-mysql-5.7-property" => "additional-mysql-5.7-value"
-          },
           "mysqld" => {
             "additional-mysqld-property" => "additional-mysqld-value"
           },
@@ -411,9 +387,6 @@ describe 'my.cnf template' do
     end
     it 'adds additional provided mysql-8.0 properties' do
       expect(parsed_mycnf).to include("mysql-8.0" => hash_including("additional-mysql-8.0-property" => "additional-mysql-8.0-value"))
-    end
-    it 'adds additional provided mysql-5.7 properties' do
-      expect(parsed_mycnf).to include("mysql-5.7" => hash_including("additional-mysql-5.7-property" => "additional-mysql-5.7-value"))
     end
     it 'adds additional provided mysqld properties' do
       expect(parsed_mycnf).to include("mysqld" => hash_including("additional-mysqld-property" => "additional-mysqld-value"))

@@ -1,4 +1,5 @@
-name: PXC Unit Tests v2
+name: PXC Unit Tests v3
+run-name: PXC unit tests triggered by ${{ github.sha }}
 on:
   push
 jobs:

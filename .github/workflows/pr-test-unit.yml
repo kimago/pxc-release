@@ -1,4 +1,4 @@
-name: PXC Unit Tests v3
+name: PXC Unit Tests v4
 run-name: PXC unit tests triggered by ${{ github.sha }}
 on:
   push
@@ -10,4 +10,4 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: src/generate-auto-tune-mysql/go.mod
-      - run: echo Lets test auto-tune; cd src/generate-auto-tune-mysql; go test; cd ../..; echo Voila.
+      - run: echo Lets test auto-tune; cd src/generate-auto-tune-mysql; go run github.com/onsi/ginkgo/v2/ginkgo -r; cd ../..; echo Voila.

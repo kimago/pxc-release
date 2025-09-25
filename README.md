@@ -1,4 +1,4 @@
-# pxc-release
+# KIMS AWESOME pxc-release
 
 Percona Xtradb Cluster release
 

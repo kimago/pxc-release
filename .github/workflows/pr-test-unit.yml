@@ -1,0 +1,12 @@
+name: PXC Unit Tests v1
+on:
+  push
+jobs:
+  unit-test-auto-tune:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.24.0'
+      - run: echo Lets test auto-tune; cd src/generate-auto-tune-mysql; go test; cd ../..; echo Voila.

@@ -1,4 +1,4 @@
-name: PXC Unit Tests v1
+name: PXC Unit Tests v2
 on:
   push
 jobs:
@@ -8,5 +8,5 @@ jobs:
       - uses: actions/checkout@v5
       - uses: actions/setup-go@v5
         with:
-          go-version: '1.24.0'
+          go-version-file: src/generate-auto-tune-mysql/go.mod
       - run: echo Lets test auto-tune; cd src/generate-auto-tune-mysql; go test; cd ../..; echo Voila.

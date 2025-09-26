@@ -50,7 +50,7 @@ wsrep_slave_threads = {{.numCPUs}}
 		"targetPercentageOfDisk": values.TargetPercentageofDisk,
 	}
 	if err := tmpl.Execute(writer, data); err != nil {
-		return fmt.Errorf("THIS IS BROKEN: %w", err)
+		return fmt.Errorf("failed to emit mysql configuration: %w", err)
 	}
 
 	return nil

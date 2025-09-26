@@ -1,4 +1,4 @@
-name: PXC Unit Tests v11
+name: PXC Unit Tests v12
 run-name: PXC unit tests triggered by ${{ github.sha }}
 on:
   pull_request
@@ -10,11 +10,12 @@ jobs:
     strategy:
       matrix:
         version: [ oldstable, stable ]
-    name: Go v${{ matrix.version }} Unit Tests
+    name: unit tests (go "${{ matrix.version }}" version)
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-go@v5
         with:
           go-version: ${{ matrix.version }}
       - uses: actions/setup-ruby@v1
+      - run: go version
       - run: scripts/test-unit

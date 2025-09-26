@@ -1,14 +1,16 @@
-name: PXC Unit Tests v8
+name: PXC Unit Tests v9
 run-name: PXC unit tests triggered by ${{ github.sha }}
 on:
   push
+permissions:
+  contents: read
 jobs:
-  unit-test-auto-tune:
+  pxc-unit-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-go@v5
         with:
-          go-version-file: src/github.com/cloudfoundry-incubator/switchboard/go.mod
+          go-version-file: src/generate-auto-tune-mysql/go.mod
       - uses: actions/setup-ruby@v1
       - run: scripts/test-unit

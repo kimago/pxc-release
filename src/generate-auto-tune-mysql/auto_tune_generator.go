@@ -50,8 +50,7 @@ wsrep_slave_threads = {{.numCPUs}}
 		"targetPercentageOfDisk": values.TargetPercentageofDisk,
 	}
 	if err := tmpl.Execute(writer, data); err != nil {
-		// Introducing breaking test...
-		return fmt.Errorf("ERROR HEADER unsupported by tests...: %w", err)
+		return fmt.Errorf("failed to emit mysql configuration: %w", err)
 	}
 
 	return nil

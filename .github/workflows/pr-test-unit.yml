@@ -1,4 +1,4 @@
-name: PXC Unit Tests v10
+name: PXC Unit Tests v11
 run-name: PXC unit tests triggered by ${{ github.sha }}
 on:
   pull_request
@@ -7,10 +7,14 @@ permissions:
 jobs:
   pxc-unit-tests:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [ oldstable, stable ]
+    name: Go v${{ matrix.version }} Unit Tests
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-go@v5
         with:
-          go-version-file: src/generate-auto-tune-mysql/go.mod
+          go-version: ${{ matrix.version }}
       - uses: actions/setup-ruby@v1
       - run: scripts/test-unit

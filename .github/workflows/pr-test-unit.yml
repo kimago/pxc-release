@@ -1,5 +1,5 @@
-name: PXC Unit Tests v12
-run-name: PXC unit tests triggered by ${{ github.sha }}
+name: PXC Unit Tests v13
+run-name: unit tests triggered by ${{ github.event.pull_request.head.sha }}
 on:
   pull_request
 permissions:

@@ -1,4 +1,4 @@
-name: PXC Unit Tests v4
+name: PXC Unit Tests v5
 run-name: PXC unit tests triggered by ${{ github.sha }}
 on:
   push
@@ -11,3 +11,4 @@ jobs:
         with:
           go-version-file: src/generate-auto-tune-mysql/go.mod
       - run: echo Lets test auto-tune; cd src/generate-auto-tune-mysql; go run github.com/onsi/ginkgo/v2/ginkgo -r; cd ../..; echo Voila.
+      - run: echo Lets test switchboard; src/github.com/cloudfoundry-incubator/switchboard/bin/test; echo Fin.

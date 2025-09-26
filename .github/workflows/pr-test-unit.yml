@@ -1,7 +1,7 @@
-name: PXC Unit Tests v9
+name: PXC Unit Tests v10
 run-name: PXC unit tests triggered by ${{ github.sha }}
 on:
-  push
+  pull_request
 permissions:
   contents: read
 jobs:

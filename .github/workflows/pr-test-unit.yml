@@ -1,4 +1,4 @@
-name: PXC Unit Tests v5
+name: PXC Unit Tests v6
 run-name: PXC unit tests triggered by ${{ github.sha }}
 on:
   push
@@ -10,5 +10,10 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: src/generate-auto-tune-mysql/go.mod
+      - uses: actions/setup-ruby@v1
       - run: echo Lets test auto-tune; cd src/generate-auto-tune-mysql; go run github.com/onsi/ginkgo/v2/ginkgo -r; cd ../..; echo Voila.
       - run: echo Lets test switchboard; src/github.com/cloudfoundry-incubator/switchboard/bin/test; echo Fin.
+      - run: |-
+          gem install bundler
+          bundle install
+          bundle exec rspec ./spec

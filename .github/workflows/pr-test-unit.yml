@@ -1,5 +1,5 @@
-name: PXC Unit Tests v14
-run-name: unit tests triggered by pr of ${{ github.head_ref }} / ${{ github.event.pull_request.head.sha }} / "${{ github.event.pull_request.title }}"
+name: PXC Unit Tests v15
+run-name: unit tests for pr "${{ github.event.pull_request.title }}" (branch ${{ github.head_ref }})
 on:
   pull_request
 permissions:

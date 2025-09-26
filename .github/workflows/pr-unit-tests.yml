@@ -1,4 +1,4 @@
-name: Automated Unit Tests v17
+name: Automated Unit Tests v18
 run-name: 'unit tests: PR #${{ github.event.number }} "${{ github.event.pull_request.title }}"'
 on:
   pull_request
@@ -16,6 +16,15 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: ${{ matrix.version }}
+          cache-dependency-path: |
+            src/generate-auto-tune-mysql/go.sum
+            src/gra-log-purger/go.sum
+            src/smoke-tests/go.sum
+            src/github.com/cloudfoundry/galera-init/go.sum
+            src/github.com/cloudfoundry-incubator/cf-mysql-cluster-health-logger/go.sum
+            src/github.com/cloudfoundry-incubator/galera-healthcheck/go.sum
+            src/github.com/cloudfoundry-incubator/cf-mysql-bootstrap/go.sum
+            src/github.com/cloudfoundry-incubator/switchboard/go.sum
       - uses: actions/setup-ruby@v1
       - run: go version
       - run: scripts/test-unit

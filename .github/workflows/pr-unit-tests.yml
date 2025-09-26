@@ -1,5 +1,5 @@
-name: PXC Unit Tests v16
-run-name: 'unit tests for pr #${{ github.event.number }} "${{ github.event.pull_request.title }}" (branch ${{ github.head_ref }})'
+name: Automated Unit Tests v17
+run-name: 'unit tests: PR #${{ github.event.number }} "${{ github.event.pull_request.title }}"'
 on:
   pull_request
 permissions:
@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         version: [ oldstable, stable ]
-    name: unit tests (go "${{ matrix.version }}" version)
+    name: go "${{ matrix.version }}" version
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-go@v5

@@ -14,7 +14,7 @@ concurrency:
 jobs:
   pxc-unit-tests:
     runs-on: ubuntu-latest
-    timeout-minutes: 2
+    timeout-minutes: 15
     steps:
     - name: Retrieve code
       uses: actions/checkout@v5

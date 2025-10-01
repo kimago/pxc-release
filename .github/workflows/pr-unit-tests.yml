@@ -1,4 +1,4 @@
-name: Automated Unit Tests v26
+name: Automated Unit Tests v24
 run-name: 'unit tests: PR #${{ github.event.number }} "${{ github.event.pull_request.title }}"'
 
 on:
@@ -15,22 +15,27 @@ jobs:
   pxc-unit-tests:
     runs-on: ubuntu-latest
     steps:
-    - shell: bash
-    - name: Set up test environment
-    - uses: actions/checkout@v5
-    - uses: actions/setup-go@v5
+    - name: Set up go
+      uses: actions/setup-go@v5
       with:
         go-version: 'stable'
         cache-dependency-path: "**/*.sum"
-    - uses: ruby/setup-ruby@v1
+
+    - name: Set up ruby
+      uses: ruby/setup-ruby@v1
       with:
         ruby-version: '3.3'
-    - run: |
+
+    - name: Display runtime versions
+      run: |
         echo "=== Runtime Environment ==="
         echo "Go: $(go version)"
         echo "Ruby: $(ruby --version)"
         echo "Bundler: $(bundler --version)"
         echo "=========================="
+
+    - name: Retrieve code
+      uses: actions/checkout@v5
 
     - name: Run test suite
       run: scripts/test-unit

@@ -1,4 +1,4 @@
-name: Automated Unit Tests v21
+name: Automated Unit Tests v22
 run-name: 'unit tests: PR #${{ github.event.number }} "${{ github.event.pull_request.title }}"'
 
 on:
@@ -20,6 +20,8 @@ jobs:
         with:
           go-version: 'stable'
           cache-dependency-path: "**/*.sum"
-      - uses: actions/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
       - run: go version
       - run: scripts/test-unit

@@ -1,4 +1,4 @@
-name: Automated Unit Tests v24
+name: Automated PR unit tests
 run-name: 'unit tests: PR #${{ github.event.number }} "${{ github.event.pull_request.title }}"'
 
 on:
@@ -14,6 +14,7 @@ concurrency:
 jobs:
   pxc-unit-tests:
     runs-on: ubuntu-latest
+    timeout-minutes: 2
     steps:
     - name: Retrieve code
       uses: actions/checkout@v5

@@ -44,7 +44,7 @@ func main() {
 	}
 	values.TotalDiskinKB = fsu.Total
 
-	fmt.Printf("%s Total memory in bytes: %d\n", time.Now().UTC().Format(time.RFC3339Nano), values.TotalMem)
+	fmt.Printf("%s Total memory in EXTRA TASTY BITES: %d\n", time.Now().UTC().Format(time.RFC3339Nano), values.TotalMem)
 	fmt.Printf("%s Total disk in kilobytes: %d\n", time.Now().UTC().Format(time.RFC3339Nano), values.TotalDiskinKB)
 	fmt.Printf("%s Num cores: %d\n", time.Now().UTC().Format(time.RFC3339Nano), values.NumCPUs)
 
